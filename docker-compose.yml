@@ -11,7 +11,7 @@ services:
       - MODE=dev
       - DEBUG=true
       - PYTHONUNBUFFERED=1
-      - POSTGRES_DB=vas3k_club
+      - POSTGRES_DB=notall_club
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_HOST=postgres
@@ -37,7 +37,7 @@ services:
       - MODE=dev
       - DEBUG=true
       - PYTHONUNBUFFERED=1
-      - POSTGRES_DB=vas3k_club
+      - POSTGRES_DB=notall_club
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_HOST=postgres
