@@ -39,7 +39,7 @@ Consider next required conditions for running tests:
   DJANGO_SETTINGS_MODULE=club.settings;
   PYTHONUNBUFFERED=1;
   TESTS_RUN=da
-  POSTGRES_DB=vas3k_club
+  POSTGRES_DB=notall_club
   POSTGRES_USER=postgres
   POSTGRES_PASSWORD=postgres
   POSTGRES_HOST=localhost

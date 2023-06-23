@@ -19,7 +19,7 @@ Once you decided to code something in the project you'll need to setup your envi
   ```
   When you need to connect to postgres use next params:
   ```dotenv
-  POSTGRES_DB=vas3k_club
+  POSTGRES_DB=notall_club
   POSTGRES_USER=postgres
   POSTGRES_PASSWORD=postgres
   POSTGRES_HOST=localhost
@@ -34,21 +34,21 @@ Once you decided to code something in the project you'll need to setup your envi
           ```sh
           # create db
           $ psql postgres
-          postgres=# createdb vas3k_club
+          postgres=# createdb notall_club
 
           # create user (user: vas3k, password: vas3k)
           postgres=# createuser --interactive --pwpromp
 
           # grant priviliges
-          postgres=# GRANT ALL PRIVILEGES ON DATABASE vas3k_club TO vas3k;
-          postgres=# \connect vas3k_club
+          postgres=# GRANT ALL PRIVILEGES ON DATABASE notall_club TO vas3k;
+          postgres=# \connect notall_club
           postgres=# GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO vas3k;
           postgres=# GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public to vas3k;
           postgres=# GRANT ALL PRIVILEGES ON ALL FUNCTIONS IN SCHEMA public to vas3k;
           postgres=# \q
 
           # check connection
-          $ psql -d vas3k_club -U vas3k
+          $ psql -d notall_club -U vas3k
           ```
 
   </details>

@@ -10,7 +10,7 @@ services:
       - DEBUG=false
       - APP_HOST=https://notall.club
       - MEDIA_UPLOAD_URL=https://i.vas3k.club/upload/
-      - POSTGRES_DB=vas3k_club
+      - POSTGRES_DB=notall_club
       - POSTGRES_USER=vas3k
       - POSTGRES_PASSWORD=vas3k
       - POSTGRES_HOST=postgres
@@ -69,7 +69,7 @@ services:
     environment:
       POSTGRES_USER: vas3k
       POSTGRES_PASSWORD: vas3k
-      POSTGRES_DB: vas3k_club
+      POSTGRES_DB: notall_club
     volumes:
       - /home/vas3k/pgdata:/var/lib/postgresql/data:rw
     ports:
