@@ -9,7 +9,7 @@ services:
       - PYTHONUNBUFFERED=1
       - DEBUG=false
       - APP_HOST=https://notall.club
-      - MEDIA_UPLOAD_URL=https://i.vas3k.club/upload/
+      - MEDIA_UPLOAD_URL=https://i.notall.club/upload/
       - POSTGRES_DB=notall_club
       - POSTGRES_USER=vas3k
       - POSTGRES_PASSWORD=vas3k

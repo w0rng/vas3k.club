@@ -9,7 +9,7 @@
                     <form action="{% url "email_login" %}" method="post">
                         <input type="text" name="email_or_login" value="{{ email|default:"" }}" placeholder="your@gmail.com" class="login-email" required>
                         {% if goto %}<input type="hidden" name="goto" value="{{ goto }}">{% endif %}
-                        <button type="submit" class="button login-button" style="min-width: 200px;">🤙 Войти</button>
+                        <center><button type="submit" class="button login-button" style="min-width: 200px;">🤙 Войти</button></center>
                     </form>
                 </div>
                 {% if features.PATREON_AUTH_ENABLED %}
@@ -20,10 +20,10 @@
             </div>
         </div>
 
-        <div class="login-separator">🤔 Всё еще нет клубной карты?</div>
+{#        <div class="login-separator">🤔 Всё еще нет клубной карты?</div>#}
 
-        <div class="login-join">
-            <a href="{% url "join" %}" class="button">Вступить в Клуб</a>
-        </div>
+{#        <div class="login-join">#}
+{#            <a href="{% url "join" %}" class="button">Вступить в Клуб</a>#}
+{#        </div>#}
     </div>
 {% endblock %}

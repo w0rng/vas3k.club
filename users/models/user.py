@@ -73,7 +73,7 @@ class User(models.Model, ModelDiffMixin):
     contact = models.CharField(max_length=256, null=True)
     hat = models.JSONField(null=True)
 
-    balance = models.IntegerField(default=0)
+    balance = models.IntegerField(default=10000)
     upvotes = models.IntegerField(default=0)
 
     created_at = models.DateTimeField(auto_now_add=True)
