@@ -46,7 +46,6 @@ def pay(request):
             "message": "По этому коду больше нельзя совершать покупки, выберите другой"
         })
 
-    payment_data = {}
     now = datetime.utcnow()
 
     # parse email
@@ -81,47 +80,11 @@ def pay(request):
         )
 
         user = request.me
-        payment_data = {
-            "invite": email,
-            "is_created": is_created,
-        }
     else:  # scenario 3: account renewal
         user = request.me
 
-    # reuse stripe customer ID if user already has it
-    if user.stripe_id:
-        customer_data = dict(customer=user.stripe_id)
-    else:
-        customer_data = dict(customer_email=user.email)
 
-    # create stripe session and payment (to keep track of history)
-    # session = stripe.checkout.Session.create(
-    #     payment_method_types=["card"],
-    #     line_items=[{
-    #         "price": product["stripe_id"],
-    #         "quantity": 1,
-    #         "tax_rates": [TAX_RATE_VAT] if TAX_RATE_VAT else [],
-    #     }],
-    #     **customer_data,
-    #     mode="subscription" if is_recurrent else "payment",
-    #     metadata=payment_data,
-    #     success_url=settings.STRIPE_SUCCESS_URL,
-    #     cancel_url=settings.STRIPE_CANCEL_URL,
-    # )
-
-    payment = Payment.create(
-        reference="todo",
-        user=user,
-        product=product,
-        data=payment_data,
-    )
-
-    return render(request, "payments/pay.html", {
-        "session": MagicMock(),
-        "product": product,
-        "payment": payment,
-        "user": user,
-    })
+    return render(request, "payments/pay.html", {})
 
 
 @require_auth
