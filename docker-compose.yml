@@ -26,29 +26,14 @@ services:
       - redis
     ports: []
 
-# Uncomment these lines if you want to test the bot locally
-#  bot:
-#    build:
-#      dockerfile: Dockerfile
-#      context: .
-#    command: make docker-run-bot
-#    environment:
-#      - MODE=dev
-#      - DEBUG=true
-#      - PYTHONUNBUFFERED=1
-#      - POSTGRES_DB=notall_club
-#      - POSTGRES_USER=postgres
-#      - POSTGRES_PASSWORD=postgres
-#      - POSTGRES_HOST=postgres
-#      - REDIS_DB=0
-#      - REDIS_HOST=redis
-#    restart: always
-#    volumes:
-#      - .:/app:delegated
-#    depends_on:
-#      - club_app
-#      - postgres
-#      - redis
+  bot:
+    <<: *app
+    command: make docker-run-bot
+    ports: []
+    depends_on:
+      - club_app
+      - postgres
+      - redis
 
   postgres:
     image: postgres:11
