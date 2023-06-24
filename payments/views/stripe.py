@@ -11,6 +11,7 @@ from payments.models import Payment
 from payments.products import PRODUCTS, find_by_stripe_id, TAX_RATE_VAT
 from payments.service import stripe
 from users.models.user import User
+from unittest.mock import MagicMock
 
 log = logging.getLogger()
 
@@ -108,29 +109,29 @@ def pay(request):
         customer_data = dict(customer_email=user.email)
 
     # create stripe session and payment (to keep track of history)
-    session = stripe.checkout.Session.create(
-        payment_method_types=["card"],
-        line_items=[{
-            "price": product["stripe_id"],
-            "quantity": 1,
-            "tax_rates": [TAX_RATE_VAT] if TAX_RATE_VAT else [],
-        }],
-        **customer_data,
-        mode="subscription" if is_recurrent else "payment",
-        metadata=payment_data,
-        success_url=settings.STRIPE_SUCCESS_URL,
-        cancel_url=settings.STRIPE_CANCEL_URL,
-    )
+    # session = stripe.checkout.Session.create(
+    #     payment_method_types=["card"],
+    #     line_items=[{
+    #         "price": product["stripe_id"],
+    #         "quantity": 1,
+    #         "tax_rates": [TAX_RATE_VAT] if TAX_RATE_VAT else [],
+    #     }],
+    #     **customer_data,
+    #     mode="subscription" if is_recurrent else "payment",
+    #     metadata=payment_data,
+    #     success_url=settings.STRIPE_SUCCESS_URL,
+    #     cancel_url=settings.STRIPE_CANCEL_URL,
+    # )
 
     payment = Payment.create(
-        reference=session.id,
+        reference="todo",
         user=user,
         product=product,
         data=payment_data,
     )
 
     return render(request, "payments/pay.html", {
-        "session": session,
+        "session": MagicMock(),
         "product": product,
         "payment": payment,
         "user": user,

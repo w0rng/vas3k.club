@@ -1,27 +1,30 @@
-FROM ubuntu:20.04
-ENV MODE dev
-ENV DEBIAN_FRONTEND=noninteractive
+FROM node:14 as frontend
+
+WORKDIR /app
+COPY ./frontend .
+
+RUN npm install && npm run build && npm prune --production && rm -rf node_modules
+
+
+FROM python:3.8-slim-buster
 
 RUN apt-get update \
     && apt-get install --no-install-recommends -yq \
       build-essential \
-      python3 \
-      python3-dev \
-      python3-pip \
       libpq-dev \
       gdal-bin \
       libgdal-dev \
       make \
-      npm \
       cron \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
-COPY . /app
 COPY etc/crontab /etc/crontab
 RUN chmod 600 /etc/crontab
 
-RUN cd frontend && npx browserslist@latest --update-db && npm install && npm run build && cd ..
-
+COPY ./requirements.txt .
 RUN pip3 install -r requirements.txt
+
+COPY . /app
+COPY --from=frontend /app /app/frontend
