@@ -1,0 +1,5 @@
+http://*:80 {
+
+
+    reverse_proxy club_app:8000
+}

@@ -11,7 +11,7 @@ from payments.models import Payment
 from payments.products import PRODUCTS, find_by_stripe_id, TAX_RATE_VAT
 from payments.service import stripe
 from users.models.user import User
-from unittest.mock import MagicMock
+from notifications.email.invites import send_invited_email
 
 log = logging.getLogger()
 
@@ -66,23 +66,22 @@ def pay(request):
                 "message": "Нам ведь нужно будет куда-то выслать инвайт"
             })
 
-        _, is_created = User.objects.get_or_create(
+        user, is_created = User.objects.get_or_create(
             email=email,
             defaults=dict(
                 membership_platform_type=User.MEMBERSHIP_PLATFORM_DIRECT,
                 full_name=email[:email.find("@")],
                 membership_started_at=now,
-                membership_expires_at=now + timedelta(years=100),
+                membership_expires_at=now + timedelta(days=365 * 100),
                 created_at=now,
                 updated_at=now,
                 moderation_status=User.MODERATION_STATUS_INTRO,
             ),
         )
 
-        user = request.me
+        send_invited_email(from_user=request.me, to_user=user)
     else:  # scenario 3: account renewal
         user = request.me
-
 
     return render(request, "payments/pay.html", {})
 
