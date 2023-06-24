@@ -28,6 +28,7 @@ services:
 
   bot:
     <<: *app
+    container_name: club_bot
     command: make docker-run-bot
     ports: []
     depends_on:
