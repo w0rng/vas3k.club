@@ -1,5 +1,5 @@
 import logging
-from datetime import datetime
+from datetime import datetime, timedelta
 
 from django.conf import settings
 from django.http import HttpResponse
@@ -56,24 +56,10 @@ def pay(request):
 
     # who's paying?
     if not request.me:  # scenario 1: new user
-        if not email or "@" not in email:
-            return render(request, "error.html", {
-                "title": "Плохой e-mail адрес 😣",
-                "message": "Нам ведь нужно будет как-то привязать аккаунт к платежу"
-            })
-
-        user, _ = User.objects.get_or_create(
-            email=email,
-            defaults=dict(
-                membership_platform_type=User.MEMBERSHIP_PLATFORM_DIRECT,
-                full_name=email[:email.find("@")],
-                membership_started_at=now,
-                membership_expires_at=now,
-                created_at=now,
-                updated_at=now,
-                moderation_status=User.MODERATION_STATUS_INTRO,
-            ),
-        )
+        return render(request, "error.html", {
+            "title": "Не знаю как ты сюда попал",
+            "message": "Вход только по инвайтам",
+        })
     elif is_invite:  # scenario 2: invite a friend
         if not email or "@" not in email:
             return render(request, "error.html", {
@@ -87,7 +73,7 @@ def pay(request):
                 membership_platform_type=User.MEMBERSHIP_PLATFORM_DIRECT,
                 full_name=email[:email.find("@")],
                 membership_started_at=now,
-                membership_expires_at=now,
+                membership_expires_at=now + timedelta(years=100),
                 created_at=now,
                 updated_at=now,
                 moderation_status=User.MODERATION_STATUS_INTRO,
