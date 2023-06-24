@@ -53,6 +53,8 @@ services:
   postgres:
     image: postgres:11
     container_name: club_postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
     env_file:
       - .env
     ports:
@@ -64,3 +66,6 @@ services:
       - ALLOW_EMPTY_PASSWORD=yes
     ports:
       - "6379:6379"
+
+volumes:
+  postgres_data:
