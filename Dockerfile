@@ -1,7 +1,7 @@
 FROM node:14 as frontend
 
 WORKDIR /app
-COPY ./frontend .
+COPY ./src/frontend .
 
 RUN npm install && npm run build && npm prune --production && rm -rf node_modules
 
@@ -26,5 +26,6 @@ RUN chmod 600 /etc/crontab
 COPY ./requirements.txt .
 RUN pip3 install -r requirements.txt
 
-COPY . /app
-COPY --from=frontend /app /app/frontend
+COPY src .
+COPY Makefile .
+COPY --from=frontend /app ./frontend
