@@ -35,14 +35,14 @@ services:
       - postgres
       - redis
 
-#  bot:
-#    <<: *app
-#    container_name: club_bot
-#    command: make docker-run-bot
-#    depends_on:
-#      - club_app
-#      - postgres
-#      - redis
+  bot:
+    <<: *app
+    container_name: club_bot
+    command: make docker-run-bot
+    depends_on:
+      - club_app
+      - postgres
+      - redis
 
   cron:
     <<: *app
