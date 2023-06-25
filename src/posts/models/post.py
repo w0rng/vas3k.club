@@ -87,6 +87,7 @@ class Post(models.Model, ModelDiffMixin):
 
     metadata = models.JSONField(null=True)
     comment_template = models.TextField(null=True)
+    anonymous = models.BooleanField(default=False)
 
     created_at = models.DateTimeField(auto_now_add=True, db_index=True)
     updated_at = models.DateTimeField(auto_now=True)

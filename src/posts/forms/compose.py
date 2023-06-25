@@ -679,6 +679,11 @@ class PostThreadForm(PostForm):
             }
         ),
     )
+    anonymous = forms.BooleanField(
+        label="Анонимный тред",
+        required=False,
+        widget=forms.CheckboxInput(attrs={"class": "form-check-input"}),
+    )
     coauthors = SimpleArrayField(
         forms.CharField(max_length=32),
         max_length=10,
@@ -692,6 +697,7 @@ class PostThreadForm(PostForm):
             "title",
             "text",
             "comment_template",
+            "anonymous",
             "topic",
             "coauthors",
             "collectible_tag_code",

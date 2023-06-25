@@ -60,6 +60,15 @@
                     </span>
                 </div>
 
+                <div class="form-row compose-form-title">
+                    <label for="{{ form.anonymous.id_for_label }}" class="form-label">{{ form.anonymous.label }}</label>
+                    {{ form.anonymous }}
+                    {% if form.anonymous.errors %}<span class="form-row-errors">{{ form.anonymous.errors }}</span>{% endif %}
+                    <span class="form-row-help form-row-help-wide">
+                        Если включить, все комментарии будут скрыты.
+                    </span>
+                </div>
+
                 {% include "posts/compose/elements/post_settings.html" with form=form %}
 
                 {% if form.non_field_errors %}

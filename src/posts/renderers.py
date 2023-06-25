@@ -11,6 +11,7 @@ from posts.models.votes import PostVote
 from tags.models import Tag, UserTag
 from users.models.mute import Muted
 from users.models.notes import UserNote
+from users.models.user import User
 
 POSSIBLE_COMMENT_ORDERS = {"created_at", "-created_at", "-upvotes"}
 
@@ -50,6 +51,14 @@ def render_post(request, post, context=None):
     # hide deleted comments for battle (visual junk)
     if post.type == Post.TYPE_BATTLE:
         comments = comments.filter(is_deleted=False)
+
+    if post.type == Post.TYPE_THREAD and post.anonymous:
+        for comment in comments:
+            if comment.author != request.me:
+                comment.author = User(
+                    full_name="Анонимус",
+                    slug="anonymous",
+                )
 
     comment_form = CommentForm(initial={'text': post.comment_template}) if post.comment_template else CommentForm()
     context = {
