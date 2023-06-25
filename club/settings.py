@@ -309,7 +309,7 @@ PARLIAMENT_GUIDE_URL = "https://notall.club/post/12870/"
 
 WEBPACK_LOADER = {
     "DEFAULT": {
-        "CACHE": not DEBUG,
+        "CACHE": True,
         "BUNDLE_DIR_NAME": "/dist/",  # must end with slash
         "STATS_FILE": os.path.join(BASE_DIR, "frontend/webpack-stats.json"),
         "POLL_INTERVAL": 0.1,
@@ -319,7 +319,7 @@ WEBPACK_LOADER = {
     }
 }
 
-if SENTRY_DSN and not DEBUG:
+if SENTRY_DSN:
     # activate sentry on production
     sentry_sdk.init(dsn=SENTRY_DSN, integrations=[
         DjangoIntegration(),
