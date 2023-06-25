@@ -1,8 +1,8 @@
-FROM node:14 as frontend_builder
+FROM node:18-slim as frontend_builder
 
 WORKDIR /app
 COPY ./src/frontend .
-RUN npm install && npm run build && npm prune --production && rm -rf node_modules
+RUN npm install && npm run build
 
 
 FROM caddy:2.3.0-alpine as caddy
