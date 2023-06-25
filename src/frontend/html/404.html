@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+{% load static %}
+{% load text_filters %}
+{% load render_bundle from webpack_loader %}
+<html lang="ru" theme="dark">
+<head>
+    <title>{% block title %}НеВсе.Клуб ✖️‍{% endblock %}</title>
+    {% block fonts %}
+        {% include "common/fonts.html" %}
+    {% endblock %}
+    {% block meta %}
+        {% include "common/meta.html" %}
+    {% endblock %}
+    {% block og_tags %}
+        {% include "common/og.html" %}
+    {% endblock %}
+    {% include "common/favicon.html" %}
+    {% render_bundle "main" "css" %}
+</head>
+<body>
+
+{% block body %}
+    <main class="landing">
+        <div class="landing-block landing-block-limited">
+            <img src="{% static "images/logo/logo-1024.png" %}" alt="">
+            <div class="landing-title">
+                <h1>404</h1>
+                <p>Эта дверь закрыта даже для тебя</p>
+            </div>
+        </div>
+    </main>
+{% endblock %}
+
+{% include "common/js.html" %}
+{% block js %}{% endblock %}
+</body>
+</html>

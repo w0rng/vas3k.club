@@ -1,10 +1,14 @@
-FROM node:14 as frontend
+FROM node:14 as frontend_builder
 
 WORKDIR /app
 COPY ./src/frontend .
-
 RUN npm install && npm run build && npm prune --production && rm -rf node_modules
 
+
+FROM caddy:2.3.0-alpine as caddy
+
+COPY --from=frontend_builder /app/static /static
+COPY ./etc/Caddyfile /etc/caddy/Caddyfile
 
 FROM python:3.8-slim-buster
 
@@ -28,4 +32,4 @@ RUN pip3 install -r requirements.txt
 
 COPY src .
 COPY Makefile .
-COPY --from=frontend /app ./frontend
+COPY --from=frontend_builder /app ./frontend

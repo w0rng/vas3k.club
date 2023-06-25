@@ -14,8 +14,18 @@ services:
       - postgres
       - redis
       - queue
+
+  caddy:
+    build:
+      dockerfile: Dockerfile
+      context: .
+      target: caddy
+    container_name: club_caddy
+    command: caddy run --config /etc/caddy/Caddyfile --adapter caddyfile
     ports:
-      - "8000:8000"
+      - "80:80"
+    depends_on:
+      - club_app
 
   queue:
     <<: *app
@@ -24,17 +34,15 @@ services:
     depends_on:
       - postgres
       - redis
-    ports: []
 
-  bot:
-    <<: *app
-    container_name: club_bot
-    command: make docker-run-bot
-    ports: []
-    depends_on:
-      - club_app
-      - postgres
-      - redis
+#  bot:
+#    <<: *app
+#    container_name: club_bot
+#    command: make docker-run-bot
+#    depends_on:
+#      - club_app
+#      - postgres
+#      - redis
 
   cron:
     <<: *app

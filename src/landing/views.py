@@ -36,6 +36,9 @@ def landing(request):
     })
 
 
+def page_not_found_view(request, exception=None):
+    return render(request, "404.html", status=404)
+
 def docs(request, doc_slug):
     if doc_slug not in EXISTING_DOCS:
         raise Http404()

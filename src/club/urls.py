@@ -70,6 +70,7 @@ urlpatterns = [
         no=landing,
     ), name="landing"),
 
+
     path("join/", join, name="join"),
     path("auth/login/", login, name="login"),
     path("auth/logout/", logout, name="logout"),
@@ -217,6 +218,9 @@ urlpatterns = [
     path("<slug:post_type>/<slug:post_slug>.json", api_show_post, name="api_show_post"),
     path("<slug:post_type>/<slug:post_slug>/comments.json", api_list_post_comments, name="api_list_post_comments"),
 ]
+
+
+handler404 = "landing.views.page_not_found_view"
 
 if settings.DEBUG:
     import debug_toolbar

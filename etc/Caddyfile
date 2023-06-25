@@ -1,0 +1,11 @@
+:80 {
+   log {
+    output stdout
+   }
+   handle_path /static/* {
+      file_server {
+          root /static/
+      }
+   }
+   reverse_proxy http://club_app:8000
+}
