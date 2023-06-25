@@ -183,7 +183,7 @@ DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL", "НеВсе.Клуб <club@
 APP_HOST = os.environ.get("APP_HOST") or "http://127.0.0.1:8000"
 APP_NAME = "НеВсе.Клуб"
 APP_DESCRIPTION = "Всё интересное происходит за закрытыми дверями"
-LAUNCH_DATE = datetime(2020, 4, 13)
+LAUNCH_DATE = datetime(2023, 6, 25)
 
 AUTH_CODE_LENGTH = 6
 AUTH_CODE_EXPIRATION_TIMEDELTA = timedelta(minutes=10)
